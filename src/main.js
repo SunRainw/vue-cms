@@ -29,12 +29,17 @@ import './lib/mui/css/mui.min.css'
 import './lib/mui/css/icons-extra.css'
 
 // 按需导入Mint-UI中的组件
-import {Header, Swipe, SwipeItem,Button,Lazyload} from 'mint-ui'
-Vue.component(Header.name,Header);
-Vue.component(Swipe.name, Swipe);
-Vue.component(SwipeItem.name, SwipeItem);
-Vue.component(Button.name, Button);
-Vue.use(Lazyload)
+// import {Header, Swipe, SwipeItem,Button,Lazyload} from 'mint-ui'
+// Vue.component(Header.name,Header);
+// Vue.component(Swipe.name, Swipe);
+// Vue.component(SwipeItem.name, SwipeItem);
+// Vue.component(Button.name, Button);
+// Vue.use(Lazyload)
+
+import MintUI from 'mint-ui';
+Vue.use(MintUI);
+import 'mint-ui/lib/style.css';
+
 
 //1.3 导入自己的router.js模块
 import router from './router.js'
