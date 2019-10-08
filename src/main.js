@@ -40,6 +40,20 @@ import MintUI from 'mint-ui';
 Vue.use(MintUI);
 import 'mint-ui/lib/style.css';
 
+//安装图片预览插件
+import VuePreview from 'vue-preview';
+Vue.use(VuePreview);
+Vue.use(VuePreview, {
+  mainClass: 'pswp--minimal--dark',
+  barsSize: {top: 0, bottom: 0},
+  captionEl: false,
+  fullscreenEl: false,
+  shareEl: false,
+  bgOpacity: 0.85,
+  tapToClose: true,
+  tapToToggleControls: false
+})
+
 
 //1.3 导入自己的router.js模块
 import router from './router.js'

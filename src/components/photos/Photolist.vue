@@ -4,7 +4,7 @@
 		<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 			<div class="mui-scroll">
 				<a :class="['mui-control-item',item.id==0 ? 'mui-active' :'']" href="#item1mobile" v-for="item in cates" :key="item.id"
-				 @click="getImages(item.id)">
+				 @tap="getImages(item.id)">
 					{{item.title}}
 				</a>
 			</div>
@@ -12,13 +12,13 @@
 
 		<!-- 图片列表区域 -->
 		<ul class="photo-list">
-			<li v-for="item in imglist" :key="item._id">
+			<router-link v-for="item in imglist" :key="item._id" :to="'/home/photoinfo/'+item.img_id" tag="li">
 				<img v-lazy="item.img_url">
 				<div class="info">
 					<h2 class="info-title">{{item.title}}</h2>
 					<div class="info-body">{{item.abstract}}</div>
 				</div>
-			</li>
+			</router-link>
 		</ul>
 	</div>
 </template>
@@ -66,6 +66,7 @@
 					console.log(reslut)
 					if (reslut.body.status === 0) {
 						//手动拼接完整分类
+						this.imglist=
 						this.imglist = reslut.body.message
 					}
 				})

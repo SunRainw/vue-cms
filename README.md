@@ -63,3 +63,9 @@
 4. 在初始化时导入mui.js，webpack打包好的bundel.js中，默认启动严格模式，但mui.js中用到了 'caller', 'callee', and 'arguments' 
  + 解决方案：1.把mui.js中的非严格模式的代码改掉，2. 禁用webpack的严格模式(选择该方法)
 5. 刚进入页面时，滑动条无法工作，所以我们把初始化滑动条的代码，搬到mounted中执行
+6. 获取所有分类，渲染列表
+
+### 制作图片列表区域
+1. 懒加载图片，我们可以使用Mint-ui提供的现成的组件' lazy-load'
+2. 根据`lazy-load`的使用文档渲染图片列表数据
+

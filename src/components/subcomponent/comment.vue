@@ -25,7 +25,6 @@
 	export default {
 		data() {
 			return {
-				id: this.$route.params.id,
 				comments: [],
 				pageindex: 1,
 				msg: '' //评论输入内容
@@ -66,7 +65,6 @@
 					content: this.msg.trim()
 				}).then(result => {
 					if (result.status === 200) {
-						debugger
 						var cmt = {
 							id: this.id,
 							user_name: "访客",
@@ -79,6 +77,7 @@
 				})
 			}
 		}
+		,props:["id"]
 	}
 </script>
 

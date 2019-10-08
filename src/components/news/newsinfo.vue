@@ -9,7 +9,7 @@
 		
 		<div class="content" v-html="newsinfo.content"></div>
 		<!-- 评论区域 -->
-		<comment-box></comment-box>
+		<comment-box :id="id"></comment-box>
 	</div>
 </template>
 
@@ -35,7 +35,7 @@
 			getNewsinfo() {
 				this.$http.get('api/getnew/' + this.id).then(result => {
 					if (result.status === 200) {
-						console.log(result);
+						//console.log(result);
 						this.newsinfo = result.body;
 					} else {
 						Toast("详情数据获取失败")
@@ -45,7 +45,8 @@
 		},
 		components:{
 			'comment-box':comment
-		}
+		},
+		props:['id']
 	}
 </script>
 
