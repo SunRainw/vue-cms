@@ -15,7 +15,7 @@
 
 <script>
 	//导入评论子组件
-	import comment from '../subcomponent/comment.vue'
+	import comment from '../subcomponent/comment.vue';
 	
 	import {
 		Toast

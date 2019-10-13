@@ -1,6 +1,104 @@
 //入口文件
 
 import Vue from 'vue';
+import Vuex from 'vuex';
+Vue.use(Vuex);
+
+//从本地存储中获取数据
+var car=JSON.parse(localStorage.getItem('car')||'[]')
+
+var store=new Vuex.Store({
+	state:{
+		car:car,//{id:商品id,count:商品数量,price:商品价格,selected:商品是否选中}
+		
+	},
+	mutations:{
+		addToCar(state,goodsinfo){
+			var flag=false
+			state.car.some(item=>{
+				if(item.id==goodsinfo.id){
+					item.count+=parseInt(goodsinfo.count);
+					flag=true;
+					return true;
+				}
+			})
+			
+			if(flag===false){
+				state.car.push(goodsinfo);
+			}
+			localStorage.setItem('car',JSON.stringify(state	.car));
+		},
+		updateGoodsInfo(state,goodsinfo){
+			//修改购物车中的数量
+			console.log(goodsinfo.count)
+			state.car.forEach(item=>{
+				if(item.id==goodsinfo.id+50){
+					item.count=parseInt(goodsinfo.count);
+					return true;
+				}
+			})
+		
+			localStorage.setItem('car',JSON.stringify(state.car))
+		},
+		removeFromCar(state,id){
+			//根据id从store中购物车中删除对应的那条商品
+			state.car.some((item,index)=>{
+				console.log(id+50)
+				if(item.id===id+50){
+					state.car.splice(this.index,1)
+					console.log('ok')
+					return true;
+				}
+			})
+			localStorage.setItem('car',JSON.stringify(state.car))
+		},
+		updateGoodsSelected(state,info){
+			state.car.some(item=>{
+				if(item.id==info.id){
+					item.selected=info.selected
+				}
+			})
+			localStorage.setItem('car',JSON.stringify(state.car))
+		},
+		
+	},
+	getters:{
+		getAllCount(state){
+			var all=0;
+			state.car.forEach(item=>{
+				all+=item.count;
+			});
+			return all;
+		},
+		getGoodsCount(state){
+			var o={}
+			state.car.forEach(item=>{
+				o[item.id]=item.count;
+			})
+			return o;
+		},
+		getGoodsSelected(state){
+			var o={};
+			state.car.forEach(item=>{
+				o[item.id]=item.selected
+			})
+			return o;
+		},
+		getGoodsCountAndAmount(state){
+			var o={
+				count:0,//勾选的数量
+				amount:0//总价
+			};
+			state.car.forEach(item=>{
+				if(item.selected){
+					o.count+=item.count;
+					o.amount+=item.price*item.count
+				}
+			})
+			return o;
+		}
+	}
+})
 
 //1.1 导入路由包
 import VueRouter from 'vue-router';
@@ -70,5 +168,6 @@ var vm = new Vue({
 	},
 	render: c => c(app), 
 	//1.4 挂载路由对象在实例上
-	router
+	router,
+	store
 })

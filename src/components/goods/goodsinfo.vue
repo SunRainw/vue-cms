@@ -106,6 +106,8 @@
 			addToCar() {
 				this.ballFlag = !this.ballFlag;
 				// console.log(1)
+				var goodsinfo={id:this.id,count:this.selectCount,price:this.goodsinfo.sell_price,selected:true};
+				this.$store.commit("addToCar",goodsinfo);
 			},
 			beforeEnter(el) {
 				el.style.transform = "translate(0,0)";
